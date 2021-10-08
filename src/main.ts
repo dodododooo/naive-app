@@ -1,12 +1,16 @@
 import { createApp } from 'vue';
-import App from './App.vue';
-import router from './router';
 import { createPinia } from 'pinia';
+import naive from 'naive-ui';
+import router from './router';
 import plugins from './plugins';
-import naive from 'naive-ui'
+import App from './App.vue';
 import './style/index.scss';
 
-import './mock'
+import './mock';
 
 const app = createApp(App);
-app.use(naive).use(router).use(createPinia()).use(plugins).mount('#app');
+app.use(naive)
+  .use(router)
+  .use(createPinia())
+  .use(plugins)
+  .mount('#app');

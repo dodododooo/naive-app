@@ -1,5 +1,5 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router';
-import { useSystemStore } from '@/store/system';
+import useSystemStore from '@/store/system';
 
 const files = import.meta.glob('../views/*.vue');
 
@@ -11,19 +11,23 @@ const routes: Array<RouteRecordRaw> = [
   },
 ];
 
+// eslint-disable-next-line no-restricted-syntax
 for (const path in files) {
-  if (/component|module|util|use(?!r[/.])/i.test(path)) break; // 过滤组件, hooks(排除user路径)
-  const module = (await files[path]()).default;
-  if (!module.name) throw new Error('page module must have a name');
-  const name = module.name;
-  const meta = Object.assign({ title: name }, module.routeMeta);
-  if (meta.keepAlive) aliveComponents.push(name);
-  routes.push({
-    path: `/${name}`,
-    name: name,
-    component: module,
-    meta,
-  })
+  if (Object.prototype.hasOwnProperty.call(files, path)) {
+    if (/component|module|util|use(?!r[/.])/i.test(path)) break; // 过滤组件, hooks(排除user路径)
+    // eslint-disable-next-line no-await-in-loop
+    const module = (await files[path]()).default;
+    const { name } = module;
+    if (!name) throw new Error('page module must have a name');
+    const meta = { title: name, ...module.routeMeta };
+    if (meta.keepAlive) aliveComponents.push(name);
+    routes.push({
+      path: `/${name}`,
+      name,
+      component: module,
+      meta,
+    });
+  }
 }
 
 export const keepAliveComponents = aliveComponents.join(',');

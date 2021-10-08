@@ -1,0 +1,3 @@
+/node_modules/*
+/src/style/index.scss
+/plugin-vue:export-helper

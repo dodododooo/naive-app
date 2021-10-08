@@ -6,11 +6,11 @@ import eslint from '@rollup/plugin-eslint';
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
+    vue(),
     {
       ...eslint(),
       enforce: 'pre',
     },
-    vue(),
   ],
   resolve: {
     alias: {

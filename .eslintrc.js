@@ -16,6 +16,7 @@ module.exports = {
     sourceType: 'module',
   },
   rules: {
+    eqeqeq: ['warn', 'always', { null: 'never' }],
     'no-console': process.env.VITE_USER_NODE_ENV === 'production' ? 'error' : 'off',
     'no-debugger': process.env.VITE_USER_NODE_ENV === 'production' ? 'error' : 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
@@ -24,6 +25,7 @@ module.exports = {
     'import/no-unresolved': 'off',
     'import/no-extraneous-dependencies': 'off',
     'no-param-reassign': 'warn',
+    'arrow-body-style': ['error', 'as-needed'],
   },
   globals: {
     defineProps: 'readonly',
