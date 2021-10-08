@@ -1,5 +1,5 @@
 /* eslint-disable */
-import { ComponentCustomProperties } from 'vue'
+// import { ComponentCustomProperties } from 'vue'
 import 'vue-router'
 // import { Store } from 'vuex'
 import axios from 'axios'

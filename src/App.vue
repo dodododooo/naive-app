@@ -1,18 +1,15 @@
 <template>
   <router-view v-slot="{ Component, route }">
     <transition :name="route.meta.transition || 'fade'" mode="out-in">
-      <keep-alive :include="keepAliveComponents">
-        <component
-          :is="Component"
-        />
-      </keep-alive>
+      <component
+        :is="Component"
+      />
     </transition>
   </router-view>
 </template>
 
 <script setup lang="ts">
 // import { defineComponent } from 'vue';
-import { keepAliveComponents } from '@/router';
 
 // export default defineComponent({
 //   name: 'App',
@@ -25,13 +22,4 @@ import { keepAliveComponents } from '@/router';
 </script>
 
 <style>
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 200ms ease;
-}
-
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
-}
 </style>
