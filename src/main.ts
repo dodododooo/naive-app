@@ -8,9 +8,9 @@ import './style/index.scss';
 
 import './mock';
 
-const app = createApp(App);
-app.use(naive)
+createApp(App)
   .use(router)
   .use(createPinia())
   .use(plugins)
+  .use(naive)
   .mount('#app');

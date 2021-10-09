@@ -7,7 +7,8 @@
       :width="240"
       show-trigger="arrow-circle"
       content-style="padding: 24px;"
-    >海淀桥</n-layout-sider>
+      >海淀桥</n-layout-sider
+    >
     <n-layout>
       <n-layout-header>颐和园路</n-layout-header>
       <n-layout-content content-style="padding: 24px;">
@@ -37,5 +38,8 @@ export default defineComponent({
 });
 </script>
 
-<style>
+<style scoped lang="scss">
+.a {
+  color: #42b983;
+}
 </style>

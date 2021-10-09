@@ -24,8 +24,5 @@
     "src/**/*.d.ts",
     "src/**/*.tsx",
     "src/**/*.vue"
-  ],
-  "exclude": [
-    "src/plugins/utils.ts"
   ]
 }

@@ -1,7 +1,9 @@
-import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router';
+import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 import useSystemStore from '@/store/system';
 
-const files = import.meta.glob('../views/*.vue');
+const files = import.meta.glob('../views/**/*.vue');
+
+console.log(files);
 
 const aliveComponents: string[] = [];
 const routes: Array<RouteRecordRaw> = [
@@ -33,9 +35,9 @@ for (const path in files) {
 export const keepAliveComponents = aliveComponents.join(',');
 
 const router = createRouter({
-  history: createWebHashHistory(),
+  history: createWebHistory(),
   routes,
-  scrollBehavior(to, from, savedPosition) {
+  scrollBehavior(to, _, savedPosition) {
     let pos: any = null;
     if (to.hash) {
       pos = { el: to.hash };
@@ -54,7 +56,7 @@ const router = createRouter({
 
 router.beforeEach((to) => {
   const systemStore = useSystemStore();
-  if (to.meta.requiresAuth && !systemStore.isLogined) {
+  if (!systemStore.isLogined) {
     document.title = '登录';
     return {
       path: '/Login',
