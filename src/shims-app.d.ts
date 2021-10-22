@@ -12,9 +12,7 @@ declare module '@vue/runtime-core' {
 }
 declare module 'vue-router' {
   interface RouteMeta {
-    requiresAuth?: boolean;
     title?: string;
-    keepAlive?: boolean;
     transition?: string;
   }
 }

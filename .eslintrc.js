@@ -23,6 +23,7 @@ module.exports = {
     'import/no-extraneous-dependencies': 'off',
     'no-param-reassign': 'warn',
     'arrow-body-style': ['error', 'as-needed'],
+    'consistent-return': ['error', { treatUndefinedAsUnspecified: true }],
   },
   globals: {
     defineProps: 'readonly',

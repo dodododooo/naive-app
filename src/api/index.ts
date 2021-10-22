@@ -1,4 +1,4 @@
-import axios from '@/plugins/axios';
+import axios from '@/utils/axios';
 
 export const getMenus = (params?: any) => axios.get('/api/admin/menus', { params });
 

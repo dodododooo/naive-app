@@ -3,36 +3,36 @@ import useSystemStore from '@/store/system';
 
 const files = import.meta.glob('../views/**/*.vue');
 
-console.log(files);
-
-const aliveComponents: string[] = [];
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
-    redirect: '/Home',
+    redirect: '/home',
   },
+  {
+    name: 'home',
+    path: '/home',
+    component: () => import('../views/Home.vue'),
+    meta: {
+      title: '首页',
+    },
+  },
+  // {
+  //   name: 'login',
+  //   path: '/login',
+  //   component: () => import('../views/Login.vue'),
+  //   meta: {
+  //     title: '登录',
+  //   },
+  // },
 ];
 
-// eslint-disable-next-line no-restricted-syntax
-for (const path in files) {
-  if (Object.prototype.hasOwnProperty.call(files, path)) {
-    if (/component|module|util|use(?!r[/.])/i.test(path)) break; // 过滤组件, hooks(排除user路径)
-    // eslint-disable-next-line no-await-in-loop
-    const module = (await files[path]()).default;
-    const { name } = module;
-    if (!name) throw new Error('page module must have a name');
-    const meta = { title: name, ...module.routeMeta };
-    if (meta.keepAlive) aliveComponents.push(name);
-    routes.push({
-      path: `/${name}`,
-      name,
-      component: module,
-      meta,
-    });
-  }
-}
-
-export const keepAliveComponents = aliveComponents.join(',');
+Object.keys(files).forEach((path, index) => {
+  routes.push({
+    name: `${path}`,
+    path: `/${index}`,
+    component: files[path],
+  });
+});
 
 const router = createRouter({
   history: createWebHistory(),
@@ -59,7 +59,7 @@ router.beforeEach((to) => {
   if (!systemStore.isLogined) {
     document.title = '登录';
     return {
-      path: '/Login',
+      path: '/login',
       // 保存我们所在的位置，以便以后再来
       query: { redirect: to.fullPath },
     };

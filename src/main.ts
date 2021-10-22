@@ -2,7 +2,7 @@ import { createApp } from 'vue';
 import { createPinia } from 'pinia';
 import naive from 'naive-ui';
 import router from './router';
-import plugins from './plugins';
+import plugins from './utils';
 import App from './App.vue';
 import './style/index.scss';
 
