@@ -27,6 +27,10 @@ instance.interceptors.response.use(
 
 const request = async <T = any>(config: AxiosRequestConfig): Promise<ResponseDataType<T>> => {
   const { data } = await instance.request<ResponseDataType<T>>(config);
+  const { code, message, status } = data;
+  if (code !== 200) {
+    window.$message[status](message);
+  }
   return data;
 };
 
