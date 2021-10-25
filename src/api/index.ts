@@ -1,5 +1,5 @@
-import axios from '@/utils/axios';
+import request from '@/utils/axios';
 
-export const getMenus = (params?: any) => axios.get('/api/admin/menus', { params });
+export const getMenus = (params?: any) => request({ url: '/api/admin/menus', params });
 
-export const test = (params?: any) => axios.get('/api/admin/menus', { params });
+export const login = (data?: any) => request({ url: '/api/admin/menus', method: 'post', data });

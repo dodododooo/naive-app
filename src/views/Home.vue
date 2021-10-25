@@ -1,3 +1,12 @@
+<script setup lang="ts">
+import { NLayout, NLayoutSider, NLayoutHeader, NLayoutContent, NLayoutFooter } from 'naive-ui';
+import { getMenus } from '@/api';
+
+getMenus().then((res) => {
+  console.log(res);
+});
+</script>
+
 <template>
   <n-layout has-sider position="absolute">
     <n-layout-sider
@@ -7,13 +16,13 @@
       :width="240"
       show-trigger="arrow-circle"
       content-style="padding: 24px;"
-      >海淀桥</n-layout-sider
+      >jk3</n-layout-sider
     >
     <n-layout>
       <n-layout-header>颐和园路</n-layout-header>
       <n-layout-content content-style="padding: 24px;">
-        <router-view v-slot="{ Component, route }">
-          <transition :name="route.meta.transition || 'fade'" mode="out-in">
+        <router-view v-slot="{ Component }">
+          <transition name="fade" mode="out-in">
             <component :is="Component" />
           </transition>
         </router-view>
@@ -22,24 +31,3 @@
     </n-layout>
   </n-layout>
 </template>
-
-<script lang="ts">
-import { defineComponent } from 'vue';
-import { getMenus } from '@/api';
-
-export default defineComponent({
-  name: 'Home',
-  setup() {
-    getMenus({ a: 1, b: [1, 2, 3, 4, 5] }).then((res) => {
-      console.log(res);
-    });
-    return {};
-  },
-});
-</script>
-
-<style scoped lang="scss">
-.a {
-  color: #42b983;
-}
-</style>

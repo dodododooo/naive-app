@@ -1,22 +1,21 @@
-<template>
-  <router-view v-slot="{ Component }">
-    <transition name="fade" mode="out-in">
-      <component :is="Component" />
-    </transition>
-  </router-view>
-</template>
-
 <script setup lang="ts">
-// import { defineComponent } from 'vue';
+import { computed } from 'vue';
+import { NConfigProvider, darkTheme, useOsTheme, NNotificationProvider, NMessageProvider, NGlobalStyle } from 'naive-ui';
 
-// export default defineComponent({
-//   name: 'App',
-//   setup() {
-//     return {
-//       keepAliveComponents
-//     }
-//   }
-// });
+const theme = computed(() => (useOsTheme().value === 'dark' ? darkTheme : null));
 </script>
 
-<style></style>
+<template>
+  <n-config-provider :theme="theme" class="app-content">
+    <n-notification-provider>
+      <n-message-provider>
+        <router-view v-slot="{ Component }">
+          <transition name="fade" mode="out-in">
+            <component :is="Component" />
+          </transition>
+        </router-view>
+      </n-message-provider>
+    </n-notification-provider>
+    <n-global-style />
+  </n-config-provider>
+</template>

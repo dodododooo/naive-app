@@ -1,8 +1,6 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 import useSystemStore from '@/store/system';
 
-const files = import.meta.glob('../views/**/*.vue');
-
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
@@ -16,23 +14,15 @@ const routes: Array<RouteRecordRaw> = [
       title: '首页',
     },
   },
-  // {
-  //   name: 'login',
-  //   path: '/login',
-  //   component: () => import('../views/Login.vue'),
-  //   meta: {
-  //     title: '登录',
-  //   },
-  // },
+  {
+    name: 'login',
+    path: '/login',
+    component: () => import('../views/Login.vue'),
+    meta: {
+      title: '登录',
+    },
+  },
 ];
-
-Object.keys(files).forEach((path, index) => {
-  routes.push({
-    name: `${path}`,
-    path: `/${index}`,
-    component: files[path],
-  });
-});
 
 const router = createRouter({
   history: createWebHistory(),
@@ -56,7 +46,7 @@ const router = createRouter({
 
 router.beforeEach((to) => {
   const systemStore = useSystemStore();
-  if (!systemStore.isLogined) {
+  if (!systemStore.isLogined && to.name !== 'login') {
     document.title = '登录';
     return {
       path: '/login',

@@ -1,3 +1,5 @@
+const mode = import.meta.env.MODE;
+
 module.exports = {
   root: true,
   env: {
@@ -14,8 +16,8 @@ module.exports = {
   rules: {
     'prettier/prettier': 'error',
     eqeqeq: ['warn', 'always', { null: 'never' }],
-    'no-console': process.env.VITE_USER_NODE_ENV === 'production' ? 'error' : 'off',
-    'no-debugger': process.env.VITE_USER_NODE_ENV === 'production' ? 'error' : 'off',
+    'no-console': mode === 'production' ? 'error' : 'off',
+    'no-debugger': mode === 'production' ? 'error' : 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     // '@typescript-eslint/no-explicit-any': 'error',
     'import/extensions': 'off',
@@ -23,7 +25,7 @@ module.exports = {
     'import/no-extraneous-dependencies': 'off',
     'no-param-reassign': 'warn',
     'arrow-body-style': ['error', 'as-needed'],
-    'consistent-return': ['error', { treatUndefinedAsUnspecified: true }],
+    'consistent-return': 'off',
   },
   globals: {
     defineProps: 'readonly',

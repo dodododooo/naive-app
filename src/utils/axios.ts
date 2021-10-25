@@ -1,20 +1,21 @@
-import axios, { AxiosRequestConfig } from 'axios';
+import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
+import { ResponseDataType } from '@/types/axios';
 
 // Full config:  https://github.com/axios/axios#request-config
 // axios.defaults.baseURL = process.env.baseURL || process.env.apiUrl || '';
 // axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;
 // axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 
-const config: AxiosRequestConfig = {
+const defaultConfig: AxiosRequestConfig = {
   // baseURL: process.env.baseURL || process.env.apiUrl || ""
   // timeout: 60 * 1000, // Timeout
   // withCredentials: true, // Check cross-site Access-Control
 };
 
-const instance = axios.create(config);
+const instance: AxiosInstance = axios.create(defaultConfig);
 
 instance.interceptors.request.use(
-  (conf) => conf,
+  (config) => config,
   (err) => Promise.reject(err)
 );
 
@@ -24,4 +25,9 @@ instance.interceptors.response.use(
   (err) => Promise.reject(err)
 );
 
-export default instance;
+const request = async <T = any>(config: AxiosRequestConfig): Promise<ResponseDataType<T>> => {
+  const { data } = await instance.request<ResponseDataType<T>>(config);
+  return data;
+};
+
+export default request;
