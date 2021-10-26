@@ -1,4 +1,4 @@
-const mode = import.meta.env.MODE;
+const PROD = import.meta.env.PROD;
 
 module.exports = {
   root: true,
@@ -16,8 +16,8 @@ module.exports = {
   rules: {
     'prettier/prettier': 'error',
     eqeqeq: ['warn', 'always', { null: 'never' }],
-    'no-console': mode === 'production' ? 'error' : 'off',
-    'no-debugger': mode === 'production' ? 'error' : 'off',
+    'no-console': PROD ? 'error' : 'off',
+    'no-debugger': PROD ? 'error' : 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     // '@typescript-eslint/no-explicit-any': 'error',
     'import/extensions': 'off',
